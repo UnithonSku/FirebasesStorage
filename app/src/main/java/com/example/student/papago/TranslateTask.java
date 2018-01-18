@@ -1,31 +1,28 @@
 package com.example.student.papago;
 
-import android.util.Log;
+import android.os.AsyncTask;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by student on 2018-01-18.
  */
 
-//echMKoKhU_Ch1NR3Ea1v
-//Mu0puZi05V
-public class Translate {
-    String sentence,inputline,str;
-    String id = "echMKoKhU_Ch1NR3Ea1v";
-    String pw = "Mu0puZi05V";
-    public Translate(){
-        Log.d("RCMsg", "생성");
+public class TranslateTask extends AsyncTask<String ,String>{
+
+    String text;
+    String receiveMsg;
+    public TranslateTask(String text){
+        this.text = text;
     }
-    public String Tanslatego() {
+    public TranslateTask(){}
+    @Override
+    protected String doInBackground(String... strings) {
         String clientId = "echMKoKhU_Ch1NR3Ea1v";//애플리케이션 클라이언트 아이디값";
         String clientSecret = "Mu0puZi05V";//애플리케이션 클라이언트 시크릿값";
         try {
@@ -72,7 +69,6 @@ public class Translate {
         } catch (Exception e) {
             System.out.println(e);
         }
-            return "메로나";
+        return "메로나";
     }
-
 }

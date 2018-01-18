@@ -1,5 +1,6 @@
 package com.example.student.papago;
 
+import android.support.annotation.IntRange;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.concurrent.ExecutionException;
 
 
 //echMKoKhU_Ch1NR3Ea1v
@@ -31,13 +34,16 @@ public class MainActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("RCMsg", "이상무");
                 sendMsg = editText.getText().toString();
-
-                Log.d("RCMsg", "이상무");
-                Toast.makeText(getApplicationContext(),sendMsg,Toast.LENGTH_SHORT).show();
-                Log.d("RCMsg", "이상무");
-                Toast.makeText(getApplicationContext(),translate.Tanslatego(),Toast.LENGTH_SHORT).show();
+                try {
+                    receiveMsg = new TranslateTask().execute().get();
+                }
+               catch (InterruptedException e){
+                    e.printStackTrace();
+               }
+               catch (ExecutionException e){
+                   e.printStackTrace();
+               }
 
                textView.setText(translate.Tanslatego());
             }
